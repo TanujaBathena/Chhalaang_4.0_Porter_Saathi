@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: porter_saathi_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: porter_saathi
+    volumes:
+      - mongodb_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - porter_network
+
+  backend:
+    build: .
+    container_name: porter_saathi_backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - MONGODB_URI=mongodb://admin:password123@mongodb:27017/porter_saathi?authSource=admin
+      - JWT_SECRET=porter_saathi_super_secret_key_2024
+      - GEMINI_API_KEY=AIzaSyChUrdf5nMkO5qce6H-ve16gchA4dHP30c
+      - UPLOAD_PATH=./uploads
+      - CORS_ORIGIN=http://localhost:3000
+    volumes:
+      - ./uploads:/root/uploads
+    depends_on:
+      - mongodb
+    networks:
+      - porter_network
+
+volumes:
+  mongodb_data:
+
+networks:
+  porter_network:
+    driver: bridge 
