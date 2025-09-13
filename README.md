@@ -237,6 +237,9 @@ For support and questions:
 # Build and run in production mode
 docker-compose -f docker-compose.prod.yml up -d
 ```
+### Demo
+[![Live Demo 1](https://img.shields.io/badge/Demo-1-green)](https://www.loom.com/share/3668b19817a24e07933d8cb17573e81e?sid=2c1bd88b-30f6-4cdd-8b03-c2f2f1a7bdad)
+[![Live Demo 2](https://img.shields.io/badge/Demo-2-blue)](https://www.loom.com/share/9458a72a38004264932a585295bb20e9?sid=fe12a2f8-15d5-4d7d-9948-253c1f78a1e6)
 
 ---
 
